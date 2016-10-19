@@ -13,11 +13,16 @@ stblt = False
 speedcalc = input("Enter the speed of the vehicle in numerical format")
 speed = int(speedcalc)
 brake = False
+sx = 1
 def seatbelt():
     stbltinput = input("enter the seatbelt state(on/off)")
     if stbltinput == "on":
         stblt = True
         now = time.time()
+        if sx == 1:
+           print("Have a nice drive!")
+           print("the time and date is "+ str(time.ctime()))
+        sx = sx+1
         
     elif stbltinput == "off":
         stblt = False
@@ -35,7 +40,13 @@ def seatbelt():
         else:
             caroff = True
             print("Stopping car...")
-#def main():
+
+
+            
+def main():
+    stbltontime = time.time() - now
+    
+            
 seatbelt()
 
     
