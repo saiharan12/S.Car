@@ -54,7 +54,7 @@ def seatbelt(speedn):
                     print(str(timercount)+ " seconds...")
                     time.sleep(1)
                     y = y + 1
-            print("Brake toggled\n\nSpeed->6")
+            print("Brake toggled\n\nSpeed->5")
 
 def main():
     speed = input("Enter the speed of the vehicle in numerical format\n")
