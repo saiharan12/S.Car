@@ -1,10 +1,12 @@
 import math
 import random
 import time
-import tkinter
+from tkinter import *
 #top = tkinter.Tk()
 #i'm starting now-eshan
 
+win = Tk()
+win.mainloop()
 caroff = False
 stblt = False
 speed = 0
@@ -52,6 +54,7 @@ def seatbelt(speedn):
                     print(str(timercount)+ " seconds...")
                     time.sleep(1)
                     y = y + 1
+            print("Brake toggled\n\nSpeed->6")
 
 def main():
     speed = input("Enter the speed of the vehicle in numerical format\n")
@@ -61,4 +64,3 @@ def main():
 loop=1
 while loop==1:
     main()
-
