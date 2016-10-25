@@ -4,22 +4,28 @@ import time
 import tkinter
 #top = tkinter.Tk()
 #i'm starting now-eshan
+def welcome():
+    print("welcome to S.car")
+    time.sleep(1)
+
+welcome()
 
 caroff = False
 stblt = False
-
-speed = "a"
+speedcalc = input("input the speed of the vehicle")
+speed = int(speedcalc)
+realinittime = time.time()
 brake = False
-sx = 0
+
 seatbeltbegintime = 0
 var = 1
 def init():
     print("Have a nice drive!")
     print("the time and date is "+ str(time.ctime()))
+    sx = 0
     inittime = str(time.ctime())
-def speedreg(speed):
-    print("enter the speed of the vehicle in numerical format")
-    speed = int(speed)
+def speedreg():
+    speed = int(speedcalc)
     if speed >= 120:
             print("SLOW DOWN: braking in...")
             for x in range(1,7):
@@ -51,17 +57,41 @@ def seatbelt():
         if speed < 6:
             print("Drive slowly!")
             return 0
-           
+class display:
+    #class for displaying crap - eshan
+    #must run main before calling a display function
+    # call these functions by using display.function(), print the result be 
+    def timerunning():
+        timerunning ="this program has been running for "+ str(time.time()-realinittime)+" seconds"
+        return timerunning
+    def speed():
+        # dispseed -> speed to display - eshan
+        dispseed = "the speed is " +speed 
+        return dispspeed
+    def brake():
+        if brake == True:
+            print("the brake is on")
+        else:
+            print("the brake is off")
+    def carstate():
+        if caroff == True:
+            print("the car is off")
+        else:
+            print("the car is on")
+    def stbltontime():
+        dispstbltontime = "the stblt has been on for" + stbltontime
+    def currenttime():
+        print(str(ctime()))
+
 def main():
-    init()
     speedreg()
+    init()
     seatbelt()
-    stbltontime = time.time() - seatbeltbegintime
+    stbltontime = seatbeltbegintime - time.time()
     
     
-         
-main()
- 
+main()       
+
 
     
 
