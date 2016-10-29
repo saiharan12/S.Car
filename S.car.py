@@ -1,72 +1,68 @@
 import math
 import random
 import time
-import tkinter
+from tkinter import *
 #top = tkinter.Tk()
 #i'm starting now-eshan
-def welcome():
-    print("welcome to S.car")
-    time.sleep(1)
-
-welcome()
 
 caroff = False
 stblt = False
-speedcalc = input("input the speed of the vehicle")
-speed = int(speedcalc)
-realinittime = time.time()
+speed = 0
 brake = False
-
+sx = 0
 seatbeltbegintime = 0
-var = 1
-def init():
-    print("Have a nice drive!")
-    print("the time and date is "+ str(time.ctime()))
-    sx = 0
-    inittime = str(time.ctime())
-def speedreg():
-    speed = int(speedcalc)
-    if speed >= 120:
-            print("SLOW DOWN: braking in...")
-            for x in range(1,7):
-                if x < 6:
-                    timercount = 6-x
-                    print(str(timercount)+ " seconds...")
-                    time.sleep(1)
-                    x = x+1
-                else:
-                    brake = True
-                    print("Brake toggled")
-                    speed = 80
-                    print("Speed -> 80")
-                    break
-        
+
+print("Have a nice drive!")
+print("The time and date is "+ str(time.ctime()))
+inittime = str(time.ctime())
+
+def speedreg(speedn):
+    if speedn >= 120:
+        print("SLOW DOWN: braking in...\n")
+        for x in range(1,7):
+            if x < 6:
+                timercount = 6-x
+                print(str(timercount)+ " seconds...")
+                time.sleep(1)
+                x = x+1
+            else:
+                brake = True
+                print("Brake toggled\n")
+                speed = 80
+                print("Speed -> 80\n")
+                break
+
 def stopcar():
-    print("Stopping Car")
+    print("Stopping Car\n")
     caroff = True
-    
-def seatbelt():
-    stbltinput = input("enter the seatbelt state(on/off)")
+
+def seatbelt(speedn):
+    stbltinput = input("enter the seatbelt state(on/off)\n")
     if stbltinput == "on":
         stblt = True
         seatbeltbegintime = time.time()
-        print("drive safely!")
-        
+        print("drive safely!\n")
     elif stbltinput == "off":
         stblt = False
-        if speed < 6:
-            print("Drive slowly!")
-            return 0
+        if speedn >= 6:
+            print("Please wear seatbelt. Braking in...\n")
+            for y in range(1,7):
+                if y < 6:
+                    timercount = 6-y
+                    print(str(timercount)+ " seconds...")
+                    time.sleep(1)
+                    y = y + 1
+
 class display:
     #class for displaying crap - eshan
     #must run main before calling a display function
-    # call these functions by using display.function(), print the result be 
+    # call these functions by using display.function(), print the result be
     def timerunning():
         timerunning ="this program has been running for "+ str(time.time()-realinittime)+" seconds"
         return timerunning
     def speed():
         # dispseed -> speed to display - eshan
-        dispseed = "the speed is " +speed 
+        dispseed = "the speed is " +speed
         return dispspeed
     def brake():
         if brake == True:
@@ -84,14 +80,10 @@ class display:
         print(str(ctime()))
 
 def main():
-    speedreg()
-    init()
-    seatbelt()
-    stbltontime = seatbeltbegintime - time.time()
-    
-    
-main()       
-
-
-    
-
+    speed = input("Enter the speed of the vehicle in numerical format\n")
+    speedn = int(speed)
+    speedreg(speedn)
+    seatbelt(speedn)
+loop=1
+while loop==1:
+    main()
