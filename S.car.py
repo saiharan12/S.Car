@@ -5,16 +5,23 @@ from tkinter import *
 #top = tkinter.Tk()
 #i'm starting now-eshan
 
+def welcome():
+    print("Welcome to S.car")
+    time.sleep(1)
+
+welcome()
+
 caroff = False
 stblt = False
 speed = 0
 brake = False
-sx = 0
 seatbeltbegintime = 0
 
-print("Have a nice drive!")
-print("The time and date is "+ str(time.ctime()))
-inittime = str(time.ctime())
+def __init__():
+    print("Have a nice drive!")
+    print("The time and date is "+ str(time.ctime()))
+    inittime = str(time.ctime())
+
 
 def speedreg(speedn):
     if speedn >= 120:
@@ -27,7 +34,7 @@ def speedreg(speedn):
                 x = x+1
             else:
                 brake = True
-                print("Brake toggled\n")
+                print("\nBrake toggled")
                 speed = 80
                 print("Speed -> 80\n")
                 break
@@ -52,6 +59,7 @@ def seatbelt(speedn):
                     print(str(timercount)+ " seconds...")
                     time.sleep(1)
                     y = y + 1
+            print("Brake toggled\nSpeed ->5")
 
 class display:
     #class for displaying crap - eshan
