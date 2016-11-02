@@ -45,6 +45,7 @@ def stopcar():
 
 def seatbelt(speedn):
    stbltinput = input("enter the seatbelt state(on/off)\n")
+   stbltinput = checkinput.seatbeltcheck(stbltinput)
    if stbltinput == "on":
        stblt = True
        seatbeltbegintime = time.time()
@@ -87,9 +88,34 @@ class display:
    def currenttime():
        print(str(ctime()))
 
+class checkinput:
+   def speedcheck(speed):
+      str(speed)
+      #this if is only for speed
+      speedn = int(speed)
+      while speed == "0" or speedn > 499:
+         if speed == "0":
+            print("please do not enter null values\n")
+            speed = input("please enter another value\n")
+         elif speedn > 499:
+            print("please enter a valid speed")
+            speed = input("please enter another value\n")
+      speed = speed
+      return speed
+   def seatbeltcheck(onoff):
+      if onoff == "on" or onoff == "off":
+         return null
+      else:
+         print("please input a valid response(\"on\" or \"off\")\n")
+         nstbltinput = input()
+         return nstbltinput
+   
+
 def main():
    speed = input("Enter the speed of the vehicle in numerical format\n")
-   speedn = int(speed)
+   speed = checkinput.speedcheck(speed)
+   
+   speedn = int(speed) 
    speedreg(speedn)
    seatbelt(speedn)
 loop=1
