@@ -2,6 +2,10 @@ import math
 import random
 import time
 from tkinter import *
+import sys
+import select
+import os
+
 #top = tkinter.Tk()
 #i'm starting now-eshan
 
@@ -16,6 +20,7 @@ stblt = False
 speed = 0
 brake = False
 seatbeltbegintime = 0
+drunk = False
 
 def __init__():
    print("Have a nice drive!")
@@ -54,14 +59,17 @@ def seatbelt(speedn):
        stblt = False
        if speedn >= 6:
            print("Please wear seatbelt. Braking in...\n")
-           for y in range(1,7):
-               if y < 6:
-                   timercount = 6-y
-                   print(str(timercount)+ " seconds...")
-                   time.sleep(1)
-                   y = y + 1
-           print("Brake toggled\nSpeed ->5")
-
+           try:
+              for y in range(1,11):
+                  if y <= 11:
+                      timercount = 11-y
+                      print(str(timercount)+ " seconds...")
+                      time.sleep(1)
+                      y = y + 1
+              print("Brake toggled\nSpeed ->5")
+           except KeyboardInterrupt:
+            print("Interrupted")
+            pass
 class display:
    #class for displaying crap - eshan
    #must run main before calling a display function
@@ -90,34 +98,52 @@ class display:
 
 class checkinput:
    def speedcheck(speed):
-      str(speed)
-      #this if is only for speed
-      speedn = int(speed)
-      while speed == "0" or speedn > 499:
-         if speed == "0":
-            print("please do not enter null values\n")
-            speed = input("please enter another value\n")
-         elif speedn > 499:
-            print("please enter a valid speed")
-            speed = input("please enter another value\n")
-      speed = speed
-      return speed
+      speednew = int(speed)
+      while speednew>199 or speednew== 0:
+         if speednew>199:
+            print("please do not enter invalid values")
+            speednew = int(input("please enter another value <199"))
+         if speednew == 0:
+            print("please do not enter null values")
+            speednew = int(input("please enter another value"))
+      return speednew
+   
    def seatbeltcheck(onoff):
       if onoff == "on" or onoff == "off":
-         return null
+         pass
       else:
          print("please input a valid response(\"on\" or \"off\")\n")
-         nstbltinput = input()
+         nstbltinput = input("input")
          return nstbltinput
-   
 
+def drinkreg():
+   havedrunk = input("have you drank any alcohol?")
+   if havedrunk == 'yes':
+      thinkdrunk = input("do you think you are sober enough to drive?")
+      if thinkdrunk == 'no':
+         print("ordering Taxi")
+         return 0
+      else:
+         drinktype = input(("what kind of drink did you have?"))
+         drinkamount = int(input("How many glasses or shots did you take?"))
+         elif drinktype == 'vodka':
+            if drinkamount 
+         
+      
+   else:
+      print("drive safely!")
+      
+   
+   
 def main():
    speed = input("Enter the speed of the vehicle in numerical format\n")
    speed = checkinput.speedcheck(speed)
-   
    speedn = int(speed) 
    speedreg(speedn)
    seatbelt(speedn)
 loop=1
 while loop==1:
    main()
+
+  
+
