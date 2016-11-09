@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import math
 import random
 import time
@@ -21,13 +22,24 @@ speed = 0
 brake = False
 seatbeltbegintime = 0
 drunk = False
+TaxiOrder = False
+mr = 0.017
+wt = int(input("How much do you weigh?(kg) "))
+gender = input("What is your gender?(m,f")
+if gender == "m":
+   bw = 0.58
+elif gender == 'f':
+   bw = 0.49
+else:
+   print("GTFO")
+
 
 def __init__():
    print("Have a nice drive!")
    print("The time and date is "+ str(time.ctime()))
    inittime = str(time.ctime())
 
-
+   
 def speedreg(speedn):
    if speedn >= 120:
        print("SLOW DOWN: braking in...\n")
@@ -115,35 +127,119 @@ class checkinput:
          print("please input a valid response(\"on\" or \"off\")\n")
          nstbltinput = input("input")
          return nstbltinput
+   
+def drinkgame():
+   difficulty = 10
+   ncorrect = 5
+   incorrect = 0
+   while ncorrect >= 5 or incorrect >= 10:
+      testforA = random.randint(0,difficulty)
+      testforB = random.randint(0,difficulty)
+      if testforA or testforB == 0:
+         testforA = random.randint(0,difficulty)
+         testforB = random.randint(0,difficulty)
+         
+      testopchoose = random.randint(1,3)
+      if testopchoose == 1:
+         testop = 'multiplied by'
+         testfor = testforA*testforB
+         while testforA>12 and testforB >12:
+            testforB = random.randint(0,difficulty)
+            testforA = random.randint(0,difficulty)
+      elif testopchoose ==2:
+         testop = 'plus'
+         testfor = testforA+testforB
+      elif testopchoose == 3:
+         testop = 'minus'
+         testfor = testforA-testforB
+         while testfor < 0:
+            testforB = random.randint(0,difficulty)
+            testforA = random.randint(0,difficulty)
+            testfor = testforA-testforB
+      else:
+         pass
+            
+        
+      usertest = int(input("What is  {} ".format(str(testforA))+testop+" {} ".format(str(testforB))))
+      if usertest == testfor:
+         print("correct")
+         ncorrect = ncorrect-1
+         difficulty = difficulty+5
+         if ncorrect >= 5:
+             print("you passed")
+             break
+      else:
+         print("Wrong")
+         difficulty += 10
+         incorrect = incorrect+1
+         if incorrect >=10:
+            print("you failed")
+            print("ordering Taxi")
+            taxiOrder = True
 
+   
+         
+  
+   
+     
+      
 def drinkreg():
    havedrunk = input("have you drank any alcohol?")
    if havedrunk == 'yes':
       thinkdrunk = input("do you think you are sober enough to drive?")
       if thinkdrunk == 'no':
-         print("ordering Taxi")
+         return ("ordering Taxi")
+         taxiOrder = True
          return 0
       else:
-         drinktype = input(("what kind of drink did you have?"))
-         drinkamount = int(input("How many glasses or shots did you take?"))
-         elif drinktype == 'vodka':
-            if drinkamount 
+         drinktype = input("what kind of drink did you have?(beer,wine\"b,w\" or liqour(80proof)\"\"")
+         if drinktype == 'b':
+                    dab = int(input("How many cans or bottles did you take?"))
+                    sd = dab/12
+            
+         elif drinktype == 'w':
+            daw = int(input("How many ounces did you take?"))
+            sd = daw/5
+         else:
+            dal = int(input("How many shots did you take?"))
+            sd = dal/1.5
+         dp = int(input("how long have you drunk over(hours)"))
          
-      
+         #widmark formula - eshan
+         # sd drinks
+         Ebac = (((0.806 *sd*1.2)/bw*wt)*mr*dp)*10
+         if Ebac > 0.030:
+            print("you are too drunk to drive")
+            print("Ordering taxi")
+            taxiOrder = True
+         else:
+            print("try this game")
+            drinkgame()
+         
+               
+                    
+                    
+         
    else:
       print("drive safely!")
       
-   
-   
+
+
 def main():
    speed = input("Enter the speed of the vehicle in numerical format\n")
    speed = checkinput.speedcheck(speed)
    speedn = int(speed) 
    speedreg(speedn)
    seatbelt(speedn)
+   drinkreg()
 loop=1
 while loop==1:
-   main()
+   main
+   if TaxiOrder:
+      break
+   if caroff:
+      break
+   
 
   
 
