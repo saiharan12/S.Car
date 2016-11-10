@@ -6,7 +6,7 @@ from tkinter import *
 import sys
 import select
 import os
-
+import pickle
 #top = tkinter.Tk()
 #i'm starting now-eshan
 
@@ -24,12 +24,20 @@ seatbeltbegintime = 0
 drunk = False
 TaxiOrder = False
 mr = 0.017
-wt = int(input("How much do you weigh?(kg) "))
-gender = input("What is your gender?(m,f")
+
+name = input("what is your name")
+gender = input("Please enter your gender, m or f")
+
+wt = int(input("Please enter your weigh in kgs "))
 if gender == "m":
    bw = 0.58
 elif gender == 'f':
    bw = 0.49
+   lol = (name,wt)
+   with open('lolnamewt.pickle','wb') as file:
+      pickle.dump(lol,file)
+   
+   
 else:
    print("GTFO")
 
@@ -39,7 +47,10 @@ def __init__():
    print("The time and date is "+ str(time.ctime()))
    inittime = str(time.ctime())
 
-   
+def end():
+   pass
+
+
 def speedreg(speedn):
    if speedn >= 120:
        print("SLOW DOWN: braking in...\n")
@@ -60,13 +71,13 @@ def stopcar():
    print("Stopping Car\n")
    caroff = True
 
-def seatbelt(speedn):
-   stbltinput = input("enter the seatbelt state(on/off)\n")
-   stbltinput = checkinput.seatbeltcheck(stbltinput)
+def seatbelt(speedn,stbltinput):
+ #  stbltinput = checkinput.seatbeltcheck(stbltinput)
+   
    if stbltinput == "on":
        stblt = True
        seatbeltbegintime = time.time()
-       print("drive safely!\n")
+       print("Drive safely!\n")
    elif stbltinput == "off":
        stblt = False
        if speedn >= 6:
@@ -113,26 +124,25 @@ class checkinput:
       speednew = int(speed)
       while speednew>199 or speednew== 0:
          if speednew>199:
-            print("please do not enter invalid values")
+            print("Please do not enter invalid values")
             speednew = int(input("please enter another value <199"))
          if speednew == 0:
-            print("please do not enter null values")
-            speednew = int(input("please enter another value"))
+            print("Please do not enter null values")
+            speednew = int(input("Please enter another value"))
       return speednew
    
    def seatbeltcheck(onoff):
       if onoff == "on" or onoff == "off":
          pass
       else:
-         print("please input a valid response(\"on\" or \"off\")\n")
+         print("Please input a valid response(\"on\" or \"off\")\n")
          nstbltinput = input("input")
          return nstbltinput
    
-def drinkgame():
+def drinkgame(ncorrect = 0):
    difficulty = 10
-   ncorrect = 5
    incorrect = 0
-   while ncorrect >= 5 or incorrect >= 10:
+   while ncorrect <= 5 or incorrect >= 10:
       testforA = random.randint(0,difficulty)
       testforB = random.randint(0,difficulty)
       if testforA or testforB == 0:
@@ -163,18 +173,19 @@ def drinkgame():
       usertest = int(input("What is  {} ".format(str(testforA))+testop+" {} ".format(str(testforB))))
       if usertest == testfor:
          print("correct")
-         ncorrect = ncorrect-1
+         ncorrect = ncorrect+1
          difficulty = difficulty+5
          if ncorrect >= 5:
-             print("you passed")
-             break
+             print("You have passed!")
+             end()
+             return "you win"
       else:
          print("Wrong")
          difficulty += 10
          incorrect = incorrect+1
          if incorrect >=10:
-            print("you failed")
-            print("ordering Taxi")
+            print("You have failed!")
+            print("Ordering Taxi")
             taxiOrder = True
 
    
@@ -184,61 +195,58 @@ def drinkgame():
      
       
 def drinkreg():
-   havedrunk = input("have you drank any alcohol?")
+   havedrunk = input("Have you drink any alcohol?")
    if havedrunk == 'yes':
-      thinkdrunk = input("do you think you are sober enough to drive?")
+      thinkdrunk = input("Do you think you are sober enough to drive?")
       if thinkdrunk == 'no':
-         return ("ordering Taxi")
+         return ("Ordering Taxi to take you safely!")
          taxiOrder = True
          return 0
       else:
-         drinktype = input("what kind of drink did you have?(beer,wine\"b,w\" or liqour(80proof)\"\"")
+         drinktype = input("What kind of drink did you have?(beer,wine\"b,w\" or liqour(80proof)\"\"")
          if drinktype == 'b':
-                    dab = int(input("How many cans or bottles did you take?"))
+                    dab = int(input("How many cans or bottles did you drink?"))
                     sd = dab/12
             
          elif drinktype == 'w':
-            daw = int(input("How many ounces did you take?"))
+            daw = int(input("How many ounces did you have?"))
             sd = daw/5
          else:
-            dal = int(input("How many shots did you take?"))
+            dal = int(input("How many shots did you have?"))
             sd = dal/1.5
-         dp = int(input("how long have you drunk over(hours)"))
+         dp = int(input("How long have you been drunk (hours)"))
          
          #widmark formula - eshan
          # sd drinks
          Ebac = (((0.806 *sd*1.2)/bw*wt)*mr*dp)*10
          if Ebac > 0.030:
-            print("you are too drunk to drive")
+            print("You are too drunk to drive!")
             print("Ordering taxi")
             taxiOrder = True
          else:
-            print("try this game")
-            drinkgame()
-         
-               
-                    
-                    
+            print("Try this game")
+            drinkgame()    
          
    else:
-      print("drive safely!")
+      print("Drive safely!")
       
 
 
 def main():
    speed = input("Enter the speed of the vehicle in numerical format\n")
+   stbltinputt = input("Enter the state of the seatbelt")
    speed = checkinput.speedcheck(speed)
    speedn = int(speed) 
    speedreg(speedn)
-   seatbelt(speedn)
+   seatbelt(speedn,stbltinputt)
    drinkreg()
 loop=1
-while loop==1:
-   main
-   if TaxiOrder:
-      break
-   if caroff:
-      break
+while loop==1 and TaxiOrder == False and caroff == False:
+   main()
+f   
+
+   
+      
    
 
   
