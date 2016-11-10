@@ -24,8 +24,20 @@ seatbeltbegintime = 0
 drunk = False
 TaxiOrder = False
 mr = 0.017
+country = input("please enter your country(usa,india,russia,china,france(europe),ethiopia,bangladesh' and uk supported)\n")
+if country == 'usa' or 'uk':
+   legallimit = 0.08
+elif country =='india' or 'russia':
+   legallimit = 0.03
+elif country =='france':
+   legallimit = 0.05
+elif country == 'china':
+   legallimit = 0.02
+elif country == 'ethiopia':
+   legallimit = 100
+elif country == 'bangladesh':
+   legallimit = 0
 
-name = input("what is your name")
 gender = input("Please enter your gender, m or f")
 
 wt = int(input("Please enter your weigh in kgs "))
@@ -33,9 +45,7 @@ if gender == "m":
    bw = 0.58
 elif gender == 'f':
    bw = 0.49
-   lol = (name,wt)
-   with open('lolnamewt.pickle','wb') as file:
-      pickle.dump(lol,file)
+   
    
    
 else:
@@ -195,7 +205,7 @@ def drinkgame(ncorrect = 0):
      
       
 def drinkreg():
-   havedrunk = input("Have you drink any alcohol?")
+   havedrunk = input("Have you drank any alcohol?")
    if havedrunk == 'yes':
       thinkdrunk = input("Do you think you are sober enough to drive?")
       if thinkdrunk == 'no':
@@ -214,12 +224,13 @@ def drinkreg():
          else:
             dal = int(input("How many shots did you have?"))
             sd = dal/1.5
-         dp = int(input("How long have you been drunk (hours)"))
+         dp = int(input("over how many hours have you been drunk (hours)"))
          
          #widmark formula - eshan
          # sd drinks
-         Ebac = (((0.806 *sd*1.2)/bw*wt)*mr*dp)*10
-         if Ebac > 0.030:
+ #        Ebac = (((0.806 *sd*1.2)/bw*wt)*mr*dp)*10 full formula
+         bac =( (sd/14)/wt*bw)*100
+         if bac > legallimit:
             print("You are too drunk to drive!")
             print("Ordering taxi")
             taxiOrder = True
@@ -234,8 +245,8 @@ def drinkreg():
 
 def main():
    speed = input("Enter the speed of the vehicle in numerical format\n")
-   stbltinputt = input("Enter the state of the seatbelt")
    speed = checkinput.speedcheck(speed)
+   stbltinputt = input("Enter the state of the seatbelt")
    speedn = int(speed) 
    speedreg(speedn)
    seatbelt(speedn,stbltinputt)
@@ -243,7 +254,7 @@ def main():
 loop=1
 while loop==1 and TaxiOrder == False and caroff == False:
    main()
-f   
+
 
    
       
