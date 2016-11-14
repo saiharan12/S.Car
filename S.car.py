@@ -9,13 +9,6 @@ import os
 import pickle
 #top = tkinter.Tk()
 #i'm starting now-eshan
-
-def welcome():
-   print("Welcome to S.car")
-   time.sleep(1)
-
-welcome()
-
 caroff = False
 stblt = False
 speed = 0
@@ -24,6 +17,15 @@ seatbeltbegintime = 0
 drunk = False
 TaxiOrder = False
 mr = 0.017
+global wt
+global bw
+global legallimit
+def welcome():
+   print("Welcome to S.car")
+   time.sleep(1)
+   
+
+
 country = input("please enter your country(usa,india,russia,china,france(europe),ethiopia,bangladesh' and uk supported)\n")
 if country == 'usa' or 'uk':
    legallimit = 0.08
@@ -37,6 +39,9 @@ elif country == 'ethiopia':
    legallimit = 100
 elif country == 'bangladesh':
    legallimit = 0
+else:
+   legallimit = 0.05
+
 
 gender = input("Please enter your gender, m or f")
 
@@ -45,11 +50,8 @@ if gender == "m":
    bw = 0.58
 elif gender == 'f':
    bw = 0.49
-   
-   
-   
 else:
-   print("GTFO")
+   print("that is not a valid gender")
 
 
 def __init__():
@@ -82,7 +84,7 @@ def stopcar():
    caroff = True
 
 def seatbelt(speedn,stbltinput):
- #  stbltinput = checkinput.seatbeltcheck(stbltinput)
+   #stbltinput = checkinput.seatbeltcheck(stbltinput)
    
    if stbltinput == "on":
        stblt = True
@@ -142,13 +144,19 @@ class checkinput:
       return speednew
    
    def seatbeltcheck(onoff):
-      if onoff == "on" or onoff == "off":
-         pass
-      else:
+      try:
+         if onoff == "on" or onoff == "off":
+            pass
+         else:
+            print("Please input a valid response(\"on\" or \"off\")\n")
+            nstbltinput = input("input")
+            return nstbltinput
+      except TypeError:
          print("Please input a valid response(\"on\" or \"off\")\n")
          nstbltinput = input("input")
          return nstbltinput
-   
+
+      
 def drinkgame(ncorrect = 0):
    difficulty = 10
    incorrect = 0
@@ -209,11 +217,11 @@ def drinkreg():
    if havedrunk == 'yes':
       thinkdrunk = input("Do you think you are sober enough to drive?")
       if thinkdrunk == 'no':
-         return ("Ordering Taxi to take you safely!")
+         print("Ordering Taxi to take you safely!")
          taxiOrder = True
          return 0
       else:
-         drinktype = input("What kind of drink did you have?(beer,wine\"b,w\" or liqour(80proof)\"\"")
+         drinktype = input("What kind of drink did you have?(beer,wine\"b,w\" or liqour(80proof)\"l\"")
          if drinktype == 'b':
                     dab = int(input("How many cans or bottles did you drink?"))
                     sd = dab/12
@@ -235,25 +243,49 @@ def drinkreg():
             print("Ordering taxi")
             taxiOrder = True
          else:
-            print("Try this game")
+            print("It looks like you're sober; just to be sure: Try This Game:")
             drinkgame()    
          
    else:
       print("Drive safely!")
-      
 
+
+def choosefunc():
+   chosenfunc = input("Enter a function you would like to view;\"none\" if you want to continue the program")
+   if chosenfunc == 'none':
+      pass
+   elif chosenfunc == 'seatbelt':
+      seatbelt()
+   elif chosenfunc == 'drinkreg':
+      drinkreg()
+   elif chosenfunc == 'drinkgame':
+      drinkgame()
+   elif chosenfunc =='begin':
+      begin()
+
+def begin():
+   welcome()
+   print("\n")
+   __init__()
+   print("\n")
+   choosefunc()
+   print("\n")
+   initialize()
+   print("\n")
+begin()
 
 def main():
    speed = input("Enter the speed of the vehicle in numerical format\n")
-   speed = checkinput.speedcheck(speed)
-   stbltinputt = input("Enter the state of the seatbelt")
    speedn = int(speed) 
+   speed = checkinput.speedcheck(speed)
    speedreg(speedn)
+   stbltinputt = input("Enter the state of the seatbelt")
    seatbelt(speedn,stbltinputt)
    drinkreg()
 loop=1
 while loop==1 and TaxiOrder == False and caroff == False:
    main()
+   print("Restarting the program...\n\n")
 
 
    
