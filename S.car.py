@@ -255,7 +255,9 @@ def choosefunc():
    if chosenfunc == 'none':
       pass
    elif chosenfunc == 'seatbelt':
-      seatbelt()
+      speed = input("Enter the speed of the vehicle in numerical format\n")
+      speedn = int(speed) 
+      seatbelt(speedn,stbltinputt)
    elif chosenfunc == 'drinkreg':
       drinkreg()
    elif chosenfunc == 'drinkgame':
@@ -287,8 +289,3 @@ while loop==1 and TaxiOrder == False and caroff == False:
 
 
    
-      
-   
-
-  
-
