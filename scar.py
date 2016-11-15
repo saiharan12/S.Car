@@ -29,11 +29,13 @@ def tkintermain():
         stbltinput=seatentry.get()
 
         if stbltinput == "on":
+            seatlabel1.lower()
             stblt = True
             seatlabel1=Label(seatframe,text="Drive safely!")
             seatlabel1.place(x=380,y=350)
 
         elif stbltinput == "off":
+            seatlabel1.lower()
            stblt = False
            if speedn >= 6:
                seatlabel1=Label(seatframe,text="Please wear seatbelt. Braking in 10 seconds")
