@@ -270,8 +270,6 @@ def begin():
    print("\n")
    choosefunc()
    print("\n")
-   initialize()
-   print("\n")
 begin()
 
 def main():
