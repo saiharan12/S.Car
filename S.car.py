@@ -44,7 +44,6 @@ else:
 
 
 gender = input("Please enter your gender, m or f")
-
 wt = int(input("Please enter your weigh in kgs "))
 if gender == "m":
    bw = 0.58
@@ -155,8 +154,22 @@ class checkinput:
          print("Please input a valid response(\"on\" or \"off\")\n")
          nstbltinput = input("input")
          return nstbltinput
-
-      
+   def numalphcheck(value):
+      try:
+         print(str(value))
+         return value
+      except ValueError:
+         newval = int(input("you answer was invalid; please reenter: "))
+         return newval
+   def alphnumcheck(value):
+      try:
+         print(int(value))
+         return value
+      except ValueError:
+         newval = int(input("you answer was invalid; please reenter: "))
+         return newval
+   
+         
 def drinkgame(ncorrect = 0):
    difficulty = 10
    incorrect = 0
@@ -187,32 +200,34 @@ def drinkgame(ncorrect = 0):
       else:
          pass
             
-        
-      usertest = int(input("What is  {} ".format(str(testforA))+testop+" {} ".format(str(testforB))))
-      if usertest == testfor:
-         print("correct")
-         ncorrect = ncorrect+1
-         difficulty = difficulty+5
-         if ncorrect >= 5:
-             print("You have passed!")
-             end()
-             return "you win"
-      else:
-         print("Wrong")
-         difficulty += 10
-         incorrect = incorrect+1
-         if incorrect >=10:
-            print("You have failed!")
-            print("Ordering Taxi")
-            taxiOrder = True
-            end()
-            return "you lose"
+
+      try:
+         usertest = int(input("What is  {} ".format(str(testforA))+testop+" {} ".format(str(testforB))))
+         usertest = checkinput.numalphcheck()
+         if usertest == testfor:
+            print("correct")
+            ncorrect = ncorrect+1
+            difficulty = difficulty+5
+            if ncorrect >= 5:
+                print("You have passed!")
+                end()
+                return "you win"
+         else:
+            print("Wrong")
+            difficulty += 10
+            incorrect = incorrect+1
+            if incorrect >=10:
+               print("You have failed!")
+               print("Ordering Taxi")
+               taxiOrder = True
+               end()
+               return "you lose"
+      except ValueError:
+         print("That was not valid; Please reenter your answer")
+         
 
    
-         
-  
    
-     
       
 def drinkreg():
    havedrunk = input("Have you drank any alcohol?")
@@ -275,11 +290,15 @@ def begin():
    choosefunc()
    print("\n")
 begin()
-
 def main():
    speed = input("Enter the speed of the vehicle in numerical format\n")
-   speedn = int(speed) 
+   try:
+      speed = checkinput.numalphcheck(int(speed))
+   except ValueError:
+      newval = int(input("you answer was invalid; please reenter: "))
+      speed = newval
    speed = checkinput.speedcheck(speed)
+   speedn = int(speed) 
    speedreg(speedn)
    stbltinputt = input("Enter the state of the seatbelt")
    seatbelt(speedn,stbltinputt)
