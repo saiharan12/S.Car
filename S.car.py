@@ -205,6 +205,8 @@ def drinkgame(ncorrect = 0):
             print("You have failed!")
             print("Ordering Taxi")
             taxiOrder = True
+            end()
+            return "you lose"
 
    
          
