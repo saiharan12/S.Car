@@ -43,13 +43,6 @@ def tkintermain():
                 seatlabel2=Label(seatframe,text="Parking mode on")
                 seatlabel2.place(x=500,y=430)
 
-        def timesseat():
-             seatlabel2.pack_forget()
-             seatlabel1.pack_forget()
-
-        read=Button(seatframe,text="OK",command=timesseat).place(x=500,y=440)
-
-
     def testdrink():
 
         havedrunk=StringVar
