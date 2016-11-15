@@ -23,9 +23,6 @@ def tkintermain():
 
     def testseat():
 
-        global times
-        times+=1
-
         speedtemp=speedentry.get()
         speedn=int(speedtemp)
 
