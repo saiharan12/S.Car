@@ -7,8 +7,6 @@ import sys
 import select
 import os
 import pickle
-#top = tkinter.Tk()
-#i'm starting now-eshan
 caroff = False
 stblt = False
 speed = 0
@@ -17,6 +15,49 @@ seatbeltbegintime = 0
 drunk = False
 TaxiOrder = False
 mr = 0.017
+class checkinput:
+   def speedcheck(speed):
+      speednew = int(speed)
+      while speednew>199 or speednew== 0:
+         if speednew>199:
+            print("Please do not enter invalid values")
+            speednew = int(input("please enter another value <199"))
+         if speednew == 0:
+            print("Please do not enter null values")
+            speednew = int(input("Please enter another value"))
+      return speednew
+   
+   def seatbeltcheck(onoff):
+      try:
+         if onoff == "on" or onoff == "off":
+            pass
+         else:
+            print("Please input a valid response(\"on\" or \"off\")\n")
+            nstbltinput = input("input")
+            return nstbltinput
+      except TypeError:
+         print("Please input a valid response(\"on\" or \"off\")\n")
+         nstbltinput = input("input")
+         return nstbltinput
+   def numalphcheck(value):
+      numc = 0
+      while numc != 1:
+         try:
+            print(str(value))
+            numc += 1
+            return value
+         except ValueError:
+            newval = int(input("you answer was invalid; please reenter: "))
+            return newval
+   def alphnumcheck(value):
+      try:
+         print(int(value))
+         return value
+      except ValueError:
+         newval = int(input("you answer was invalid; please reenter: "))
+         return newval
+   
+         
 global wt
 global bw
 global legallimit
@@ -25,8 +66,11 @@ def welcome():
    time.sleep(1)
    
 
-
-country = input("please enter your country(usa,india,russia,china,france(europe),ethiopia,bangladesh' and uk supported)\n")
+try:
+   country = input("please enter your country\n(usa,india,russia,china,france(europe),ethiopia,bangladesh' and uk supported)\n")
+except ValueError:
+    print("your answer is invalid")
+    country = input("please reenter your country\n(usa,india,russia,china,france(europe),ethiopia,bangladesh' and uk supported)\n")
 if country == 'usa' or 'uk':
    legallimit = 0.08
 elif country =='india' or 'russia':
@@ -44,7 +88,13 @@ else:
 
 
 gender = input("Please enter your gender, m or f")
-wt = int(input("Please enter your weigh in kgs "))
+try:
+   wt =int( input("Please enter your weight in kgs "))
+except ValueError:
+   print("your answer was invalid")
+   wt =int( input("Please renter your weight in kgs "))
+   
+
 if gender == "m":
    bw = 0.58
 elif gender == 'f':
@@ -130,46 +180,7 @@ class display:
    def currenttime():
        print(str(ctime()))
 
-class checkinput:
-   def speedcheck(speed):
-      speednew = int(speed)
-      while speednew>199 or speednew== 0:
-         if speednew>199:
-            print("Please do not enter invalid values")
-            speednew = int(input("please enter another value <199"))
-         if speednew == 0:
-            print("Please do not enter null values")
-            speednew = int(input("Please enter another value"))
-      return speednew
-   
-   def seatbeltcheck(onoff):
-      try:
-         if onoff == "on" or onoff == "off":
-            pass
-         else:
-            print("Please input a valid response(\"on\" or \"off\")\n")
-            nstbltinput = input("input")
-            return nstbltinput
-      except TypeError:
-         print("Please input a valid response(\"on\" or \"off\")\n")
-         nstbltinput = input("input")
-         return nstbltinput
-   def numalphcheck(value):
-      try:
-         print(str(value))
-         return value
-      except ValueError:
-         newval = int(input("you answer was invalid; please reenter: "))
-         return newval
-   def alphnumcheck(value):
-      try:
-         print(int(value))
-         return value
-      except ValueError:
-         newval = int(input("you answer was invalid; please reenter: "))
-         return newval
-   
-         
+
 def drinkgame(ncorrect = 0):
    difficulty = 10
    incorrect = 0
@@ -231,23 +242,28 @@ def drinkgame(ncorrect = 0):
       
 def drinkreg():
    havedrunk = input("Have you drank any alcohol?")
+   havedrunk = checkinput.alphnumcheck(havedrunk)
    if havedrunk == 'yes':
       thinkdrunk = input("Do you think you are sober enough to drive?")
+      thinkdrunk = checkinput.alphnumcheck(thinkdrunk)
       if thinkdrunk == 'no':
          print("Ordering Taxi to take you safely!")
          taxiOrder = True
          return 0
       else:
          drinktype = input("What kind of drink did you have?(beer,wine\"b,w\" or liqour(80proof)\"l\"")
+         drinktype = checkinput.alphnumcheck(drinktype)
          if drinktype == 'b':
                     dab = int(input("How many cans or bottles did you drink?"))
                     sd = dab/12
             
          elif drinktype == 'w':
             daw = int(input("How many ounces did you have?"))
+            daw = checkinput.numalphcheck(daw)
             sd = daw/5
          else:
             dal = int(input("How many shots did you have?"))
+            daw = checkinput.numalphcheck(dal)
             sd = dal/1.5
          dp = int(input("over how many hours have you been drunk (hours)"))
          
@@ -268,7 +284,7 @@ def drinkreg():
 
 
 def choosefunc():
-   chosenfunc = input("Enter a function you would like to view;\"none\" if you want to continue the program")
+   chosenfunc = input("Enter a function you would like to view;\"none\" if you want to continue the program\n (supports seatbelt, drinkreg, drinkgame and begin)")
    if chosenfunc == 'none':
       pass
    elif chosenfunc == 'seatbelt':
@@ -301,6 +317,7 @@ def main():
    speedn = int(speed) 
    speedreg(speedn)
    stbltinputt = input("Enter the state of the seatbelt")
+   stbltinputt = checkinput.alphnumcheck(stbltinputt)
    seatbelt(speedn,stbltinputt)
    drinkreg()
 loop=1
