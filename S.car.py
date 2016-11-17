@@ -6,7 +6,6 @@ from tkinter import *
 import sys
 import select
 import os
-import pickle
 caroff = False
 stblt = False
 speed = 0
@@ -241,10 +240,10 @@ def drinkgame(ncorrect = 0):
    
       
 def drinkreg():
-   havedrunk = input("Have you drank any alcohol?")
+   havedrunk = input("Have you drank any alcohol?(yes or no)")
    havedrunk = checkinput.alphnumcheck(havedrunk)
    if havedrunk == 'yes':
-      thinkdrunk = input("Do you think you are sober enough to drive?")
+      thinkdrunk = input("Do you think you are sober enough to drive?(yes or no)")
       thinkdrunk = checkinput.alphnumcheck(thinkdrunk)
       if thinkdrunk == 'no':
          print("Ordering Taxi to take you safely!")
@@ -300,10 +299,12 @@ def choosefunc():
 
 def begin():
    welcome()
+   run = 0
    print("\n")
    __init__()
    print("\n")
-   choosefunc()
+   if run > 1:
+      choosefunc()
    print("\n")
 begin()
 def main():
@@ -317,13 +318,13 @@ def main():
    speedn = int(speed) 
    speedreg(speedn)
    stbltinputt = input("Enter the state of the seatbelt")
-   stbltinputt = checkinput.alphnumcheck(stbltinputt)
    seatbelt(speedn,stbltinputt)
    drinkreg()
 loop=1
 while loop==1 and TaxiOrder == False and caroff == False:
    main()
-   print("Restarting the program...\n\n")
+   print("Restarting the Program...\n\n")
+   run += 1
 
 
    
