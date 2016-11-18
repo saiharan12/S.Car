@@ -50,14 +50,14 @@ class checkinput:
             numc += 1
             return value
          except ValueError:
-            newval = int(input("Your answer was invalid; please reenter:  "))
+            newval = int(input("Your answer was invalid; please re-enter:  "))
             return newval
    def alphnumcheck(value):
       try:
          test = (int(value))
          return value
       except ValueError:
-         newval = int(input("Your answer was invalid; please reenter:  "))
+         newval = int(input("Your answer was invalid; please re-enter:  "))
          return newval
    def yesnocheck(hd, x=0):
       while hd != 'on' or 'off':
@@ -76,7 +76,7 @@ def welcome():
    print("Welcome to S.car")
    time.sleep(1)
 
-country = input("please enter your country\n(USA,India,Russia,China,France(Europe),Ethiopia,Bangladesh' and Uk supported)\n ")
+country = input("Please enter your country\n(USA,India,Russia,China,France(Europe),Ethiopia,Bangladesh' and Uk supported)\n ")
 if country ==( 'usa' or 'uk'):
    legallimit = 0.08
 elif country ==('india' or 'russia'):
@@ -98,7 +98,7 @@ while x != 1:
       if gender == 'm' or 'f':
          x = 1
          continue
-      print("that is not a valid gender")
+      print("That is not a valid gender")
       gender = input("Please enter your gender, m or f " )
       if gender == 'm' or 'f':
          x = 1
@@ -117,11 +117,11 @@ elif gender == 'f':
 try:
    wt =int( input("Please enter your weight in kgs "))
 except ValueError:
-   print("your answer was invalid")
-   wt =int( input("Please renter your weight in kgs "))
+   print("Your answer was invalid")
+   wt =int( input("Please re-enter your weight in kgs "))
 if wt > 400:
    while wt > 400:
-      print("Come, on you don't weigh that much!")
+      print("Come on, you don't weigh that much!")
       wt = int(input("Please re-enter a reasonable value "))
 
 
@@ -136,7 +136,7 @@ def end():
 
 def speedreg(speedn):
    if speedn >= 120:
-       print("SLOW DOWN: braking in...\n")
+       print("SLOW DOWN! braking in...\n")
        for x in range(1,7):
            if x < 6:
                timercount = 6-x
@@ -164,7 +164,7 @@ def seatbelt(speedn,stbltinput):
    elif stbltinput == "off":
        stblt = False
        if speedn >= 6:
-           print("Please wear seatbelt. Braking in...\n")
+           print("Please wear your seatbelt. Braking in...\n")
            try:
               for y in range(1,11):
                   if y <= 11:
@@ -183,24 +183,24 @@ class display:
    #must run main before calling a display function
    # call these functions by using display.function(), print the result be
    def timerunning():
-       timerunning ="this program has been running for "+ str(time.time()-realinittime)+" seconds"
+       timerunning ="This program has been running for "+ str(time.time()-realinittime)+" seconds"
        return timerunning
    def speed():
        # dispseed -> speed to display - eshan
-       dispseed = "the speed is " +speed
+       dispseed = "The speed is " +speed
        return dispspeed
    def brake():
        if brake == True:
-           print("the brake is on")
+           print("The brake is on")
        else:
-           print("the brake is off")
+           print("The brake is off")
    def carstate():
        if caroff == True:
-           print("the car is off")
+           print("The car is off")
        else:
-           print("the car is on")
+           print("The car is on")
    def stbltontime():
-       dispstbltontime = "the stblt has been on for" + stbltontime
+       dispstbltontime = "The stblt has been on for" + stbltontime
    def currenttime():
        print(str(ctime()))
 
@@ -239,13 +239,13 @@ def drinkgame(ncorrect = 0):
       try:
          usertest = int(input("What is  {} ".format(str(testforA))+testop+" {} ".format(str(testforB))))
          if usertest == testfor:
-            print("correct")
+            print("Correct")
             ncorrect = ncorrect+1
             difficulty = difficulty+5
             if ncorrect >= 8:
                 print("You have passed!")
                 end()
-                return "you win"
+                return "You win"
          else:
             print("Wrong")
             difficulty += 10
@@ -255,9 +255,9 @@ def drinkgame(ncorrect = 0):
                print("Ordering Taxi")
                taxiOrder = True
                end()
-               return "you lose"
+               return "You lose"
       except ValueError:
-         print("That was not valid; Please reenter your answer")
+         print("That was an invalid answer; Please re-enter your answer")
          
 
    
@@ -267,7 +267,7 @@ def drinkreg():
    havedrunk = input("Have you drank any alcohol?(yes/no) ")
   # havedrunk = checkinput.yesnocheck(havedrunk)
    if havedrunk == 'yes':
-      thinkdrunk = input("Do you think you are sober enough to drive? ")
+      thinkdrunk = input("Do you think you are sober enough to drive?(yes/no) ")
       #thinkdrunk = checkinput.alphnumcheck(thinkdrunk)
       if thinkdrunk == 'no':
          print("Ordering Taxi to take you safely!")
@@ -287,7 +287,7 @@ def drinkreg():
          else:
             dal = int(input("How many shots did you have? "))
             sd = dal/1.5
-         dp = int(input("over how many hours have you been drunk (hours) "))
+         dp = int(input("Over how many hours have you been drunk (hours) "))
          
          #widmark formula - eshan
          # sd drinks
@@ -331,7 +331,7 @@ def main():
    try:
       speed = checkinput.numalphcheck(int(speed))
    except ValueError:
-      newval = int(input("you answer was invalid; please reenter: "))
+      newval = int(input("Your answer was invalid; please re-enter: "))
       speed = newval
    speed = checkinput.speedcheck(speed)
    speedn = int(speed) 
