@@ -21,10 +21,10 @@ class checkinput:
       while speednew>199 or speednew== 0:
          if speednew>199:
             print("Please do not enter invalid values")
-            speednew = int(input("please enter another value <199"))
+            speednew = int(input("Please enter another value < 199 "))
          if speednew == 0:
             print("Please do not enter null values")
-            speednew = int(input("Please enter another value"))
+            speednew = int(input("Please enter another value "))
       return speednew
    
    def seatbeltcheck(onoff, x=0):
@@ -35,12 +35,12 @@ class checkinput:
                x = x+1
             else:
                print("Please input a valid response(\"on\" or \"off\")\n")
-               nstbltinput = input("input")
+               nstbltinput = input("input ")
                return nstbltinput
          except TypeError:
             
             print("Please input a valid response(\"on\" or \"off\")\n")
-            nstbltinput = input("input")
+            nstbltinput = input("input ")
             return nstbltinput
    def numalphcheck(value):
       numc = 0
@@ -50,18 +50,18 @@ class checkinput:
             numc += 1
             return value
          except ValueError:
-            newval = int(input("you answer was invalid; please reenter: "))
+            newval = int(input("Your answer was invalid; please reenter:  "))
             return newval
    def alphnumcheck(value):
       try:
          test = (int(value))
          return value
       except ValueError:
-         newval = int(input("your answer was invalid; please reenter: "))
+         newval = int(input("Your answer was invalid; please reenter:  "))
          return newval
    def yesnocheck(hd, x=0):
       while hd != 'on' or 'off':
-            hd = input("Your answer was invalid; please re-enter: ")
+            hd = input("Your answer was invalid; please re-enter:  ")
       else:
          return hd
         
@@ -76,10 +76,10 @@ def welcome():
    print("Welcome to S.car")
    time.sleep(1)
 
-country = input("please enter your country\n(usa,india,russia,china,france(europe),ethiopia,bangladesh' and uk supported)\n")
-if country == 'usa' or 'uk':
+country = input("please enter your country\n(USA,India,Russia,China,France(Europe),Ethiopia,Bangladesh' and Uk supported)\n ")
+if country ==( 'usa' or 'uk'):
    legallimit = 0.08
-elif country =='india' or 'russia':
+elif country ==('india' or 'russia'):
    legallimit = 0.03
 elif country =='france':
    legallimit = 0.05
@@ -91,15 +91,15 @@ elif country == 'bangladesh':
    legallimit = 0
 else:
    legallimit = 0.05
-
+ 
 x = 0
-gender = input("Please enter your gender, m or f")
+gender = input("Please enter your gender, m or f " )
 while x != 1:
       if gender == 'm' or 'f':
          x = 1
          continue
       print("that is not a valid gender")
-      gender = input("Please enter your gender, m or f")
+      gender = input("Please enter your gender, m or f " )
       if gender == 'm' or 'f':
          x = 1
       else:
@@ -121,8 +121,8 @@ except ValueError:
    wt =int( input("Please renter your weight in kgs "))
 if wt > 400:
    while wt > 400:
-      print("come, on you don't wiegh that much!")
-      wt = int(input("Please re-enter a reasonable value"))
+      print("Come, on you don't weigh that much!")
+      wt = int(input("Please re-enter a reasonable value "))
 
 
 def __init__():
@@ -155,8 +155,8 @@ def stopcar():
    caroff = True
 
 def seatbelt(speedn,stbltinput):
-   stbltinput = checkinput.seatbeltcheck(stbltinput)
-   
+  # stbltinput = checkinput.seatbeltcheck(stbltinput)
+
    if stbltinput == "on":
        stblt = True
        seatbeltbegintime = time.time()
@@ -176,6 +176,8 @@ def seatbelt(speedn,stbltinput):
            except KeyboardInterrupt:
             print("Interrupted")
             pass
+       else:
+         print("Please do not exceed the speed limit(5) with your seatbelt disengaged.")
 class display:
    #class for displaying crap - eshan
    #must run main before calling a display function
@@ -240,7 +242,7 @@ def drinkgame(ncorrect = 0):
             print("correct")
             ncorrect = ncorrect+1
             difficulty = difficulty+5
-            if ncorrect >= 5:
+            if ncorrect >= 8:
                 print("You have passed!")
                 end()
                 return "you win"
@@ -262,31 +264,30 @@ def drinkgame(ncorrect = 0):
    
       
 def drinkreg():
-   havedrunk = input("Have you drank any alcohol?(yes/no)")
-   havedrunk = checkinput.yesnocheck(havedrunk)
+   havedrunk = input("Have you drank any alcohol?(yes/no) ")
+  # havedrunk = checkinput.yesnocheck(havedrunk)
    if havedrunk == 'yes':
-      thinkdrunk = input("Do you think you are sober enough to drive?")
-      thinkdrunk = checkinput.alphnumcheck(thinkdrunk)
+      thinkdrunk = input("Do you think you are sober enough to drive? ")
+      #thinkdrunk = checkinput.alphnumcheck(thinkdrunk)
       if thinkdrunk == 'no':
          print("Ordering Taxi to take you safely!")
          taxiOrder = True
          return 0
       else:
          drinktype = input("What kind of drink did you have?(beer,wine\"b,w\" or liqour(80proof)\"l\"")
-         drinktype = checkinput.alphnumcheck(drinktype)
+  #       drinktype = checkinput.alphnumcheck(drinktype)
          if drinktype == 'b':
-                    dab = int(input("How many cans or bottles did you drink?"))
+                    dab = int(input("How many cans or bottles did you drink? "))
                     sd = dab/12
             
          elif drinktype == 'w':
-            daw = int(input("How many ounces did you have?"))
+            daw = int(input("How many ounces did you have? "))
             daw = checkinput.numalphcheck(daw)
             sd = daw/5
          else:
-            dal = int(input("How many shots did you have?"))
-            daw = checkinput.numalphcheck(dal)
+            dal = int(input("How many shots did you have? "))
             sd = dal/1.5
-         dp = int(input("over how many hours have you been drunk (hours)"))
+         dp = int(input("over how many hours have you been drunk (hours) "))
          
          #widmark formula - eshan
          # sd drinks
@@ -305,11 +306,11 @@ def drinkreg():
 
 
 def choosefunc():
-   chosenfunc = input("Enter a function you would like to view;\"none\" if you want to continue the program\n (supports seatbelt, drinkreg, drinkgame and begin)")
+   chosenfunc = input("Enter a function you would like to view;\"none\" if you want to continue the program\n (supports seatbelt, drinkreg, drinkgame and begin) ")
    if chosenfunc == 'none':
       pass
    elif chosenfunc == 'seatbelt':
-      speed = input("Enter the speed of the vehicle in numerical format\n")
+      speed = input("Enter the speed of the vehicle in numerical format\n ")
       speedn = int(speed) 
       seatbelt(speedn,stbltinputt)
    elif chosenfunc == 'drinkreg':
@@ -326,7 +327,7 @@ def begin():
    print("\n")
 begin()
 def main():
-   speed = input("Enter the speed of the vehicle in numerical format\n")
+   speed = input("Enter the speed of the vehicle in numerical format\n ")
    try:
       speed = checkinput.numalphcheck(int(speed))
    except ValueError:
@@ -335,7 +336,7 @@ def main():
    speed = checkinput.speedcheck(speed)
    speedn = int(speed) 
    speedreg(speedn)
-   stbltinputt = input("Enter the state of the seatbelt")
+   stbltinputt = input("Enter the state of the seatbelt ")
    seatbelt(speedn,stbltinputt)
    drinkreg()
 loop=1
