@@ -11,8 +11,9 @@ global thinkdrunkvar
 thinkdrunkvar=StringVar
 global thinkdrunk
 thinkdrunk=StringVar
+global drinktype
+drinktype=StringVar
 font1=("Verdana",10)
-font2=("verdana",12)
 
 global buttonusa
 global buttonindia
@@ -48,7 +49,35 @@ def tkintermain():
         havedrunk=str(drinkselstr.get())
         testdrink()
 
-    def enddrink():
+    def enddrink2():
+
+        drinktype=str(drinktypevar.get())
+        global sd
+        global daw
+        global dal
+        global dab
+
+        daw=float
+
+        if drinktype == 'b':
+            dablabel=Label(text="How many cans or bottles did you drink?")
+            sd = dab/12
+            
+        elif drinktype == 'w':
+            dawlabel=Label(text="How many ounces did you have?")
+            sd = daw/5
+        else:
+            dallabel=Label(text="How many shots did you have?")
+            sd = dal/2
+
+        drinkamountentry=Entry(drinkframe)
+        drinkamountentry.place(x=150,y=250)
+        
+
+    def enddrink1():
+
+                global drinktypevar
+                drinktypevar=StringVar()
         
                 buttonusa.lower()
                 buttonindia.lower()
@@ -76,13 +105,16 @@ def tkintermain():
                     legallimit = 0
                 else:
                     legallimit = 0.05
-
-                drinktypetk = Entry(drinkframe,text="What kind of drink did you have?(beer,wine\"b,w\" or liqour(80proof)\"\"")
-                drinktypetk.place(x=50,y=200)
                 
-                drinktype=str(drinktypetk.get())
-     
-        
+                havedrunklabel.configure(text="Select type of alcohol")
+
+                drinktypebuttonb=Radiobutton(drinkframe,text="Beer",fg="white",bg=bgcolorb,command=enddrink2,value="b",variable=drinktypevar)
+                drinktypebuttonb.place(x=50,y=200)
+                drinktypebuttonw=Radiobutton(drinkframe,text="Wine",fg="white",bg=bgcolorb,command=enddrink2,value="w",variable=drinktypevar)
+                drinktypebuttonw.place(x=100,y=200)
+                drinktypebuttono=Radiobutton(drinkframe,text="Others",fg="white",bg=bgcolorb,command=enddrink2,value="o",variable=drinktypevar)
+                drinktypebuttono.place(x=155,y=200)
+                
 
     def contdrink():
            global countrytk
@@ -117,23 +149,23 @@ def tkintermain():
                 global buttonother
 
 
-                buttonusa=Radiobutton(drinkframe,text="USA",command=enddrink,bg=bgcolorb,fg="White",value="usa",variable=countrytk)
+                buttonusa=Radiobutton(drinkframe,text="USA",command=enddrink1,bg=bgcolorb,fg="White",value="usa",variable=countrytk)
                 buttonusa.place(x=50,y=280)
-                buttonindia=Radiobutton(drinkframe,text="India",command=enddrink,bg=bgcolorb,fg="White",value="india",variable=countrytk)
+                buttonindia=Radiobutton(drinkframe,text="India",command=enddrink1,bg=bgcolorb,fg="White",value="india",variable=countrytk)
                 buttonindia.place(x=50,y=310)
-                buttonrussia=Radiobutton(drinkframe,text="Russia",command=enddrink,bg=bgcolorb,fg="White",value="russia",variable=countrytk)
+                buttonrussia=Radiobutton(drinkframe,text="Russia",command=enddrink1,bg=bgcolorb,fg="White",value="russia",variable=countrytk)
                 buttonrussia.place(x=50,y=340)
-                buttonchina=Radiobutton(drinkframe,text="China",command=enddrink,bg=bgcolorb,fg="White",value="china",variable=countrytk)
+                buttonchina=Radiobutton(drinkframe,text="China",command=enddrink1,bg=bgcolorb,fg="White",value="china",variable=countrytk)
                 buttonchina.place(x=50,y=370)
-                buttoneurope=Radiobutton(drinkframe,text="Europe",command=enddrink,bg=bgcolorb,fg="White",value="europe",variable=countrytk)
+                buttoneurope=Radiobutton(drinkframe,text="Europe",command=enddrink1,bg=bgcolorb,fg="White",value="europe",variable=countrytk)
                 buttoneurope.place(x=150,y=280)
-                buttonethiopia=Radiobutton(drinkframe,text="Ethiopia",command=enddrink,bg=bgcolorb,fg="White",value="ethiopia",variable=countrytk)
+                buttonethiopia=Radiobutton(drinkframe,text="Ethiopia",command=enddrink1,bg=bgcolorb,fg="White",value="ethiopia",variable=countrytk)
                 buttonethiopia.place(x=150,y=310)
-                buttonbangladesh=Radiobutton(drinkframe,text="Bangladesh",command=enddrink,bg=bgcolorb,fg="White",value="bangladesh",variable=countrytk)
+                buttonbangladesh=Radiobutton(drinkframe,text="Bangladesh",command=enddrink1,bg=bgcolorb,fg="White",value="bangladesh",variable=countrytk)
                 buttonbangladesh.place(x=150,y=340)
-                buttonuk=Radiobutton(drinkframe,text="UK",command=enddrink,bg=bgcolorb,fg="White",value="uk",variable=countrytk)
+                buttonuk=Radiobutton(drinkframe,text="UK",command=enddrink1,bg=bgcolorb,fg="White",value="uk",variable=countrytk)
                 buttonuk.place(x=150,y=370)
-                buttonother=Radiobutton(drinkframe,text="Others",command=enddrink,bg=bgcolorb,fg="White",value="other",variable=countrytk)
+                buttonother=Radiobutton(drinkframe,text="Others",command=enddrink1,bg=bgcolorb,fg="White",value="other",variable=countrytk)
                 buttonother.place(x=250,y=300)
 
     def testdrink():
