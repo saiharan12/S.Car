@@ -6,6 +6,7 @@ from tkinter import *
 import sys
 import select
 import os
+import pickle
 caroff = False
 stblt = False
 speed = 0
@@ -26,23 +27,26 @@ class checkinput:
             speednew = int(input("Please enter another value"))
       return speednew
    
-   def seatbeltcheck(onoff):
-      try:
-         if onoff == "on" or onoff == "off":
-            pass
-         else:
+   def seatbeltcheck(onoff, x=0):
+      while x != 1:
+         try:
+            if onoff == "on" or onoff == "off":
+               pass
+               x = x+1
+            else:
+               print("Please input a valid response(\"on\" or \"off\")\n")
+               nstbltinput = input("input")
+               return nstbltinput
+         except TypeError:
+            
             print("Please input a valid response(\"on\" or \"off\")\n")
             nstbltinput = input("input")
             return nstbltinput
-      except TypeError:
-         print("Please input a valid response(\"on\" or \"off\")\n")
-         nstbltinput = input("input")
-         return nstbltinput
    def numalphcheck(value):
       numc = 0
       while numc != 1:
          try:
-            print(str(value))
+            test = (str(value))
             numc += 1
             return value
          except ValueError:
@@ -50,26 +54,29 @@ class checkinput:
             return newval
    def alphnumcheck(value):
       try:
-         print(int(value))
+         test = (int(value))
          return value
       except ValueError:
-         newval = int(input("you answer was invalid; please reenter: "))
+         newval = int(input("your answer was invalid; please reenter: "))
          return newval
-   
+   def yesnocheck(hd, x=0):
+      while hd != 'on' or 'off':
+            hd = input("Your answer was invalid; please re-enter: ")
+      else:
+         return hd
+        
+      
          
+            
 global wt
 global bw
 global legallimit
+
 def welcome():
    print("Welcome to S.car")
    time.sleep(1)
-   
 
-try:
-   country = input("please enter your country\n(usa,india,russia,china,france(europe),ethiopia,bangladesh' and uk supported)\n")
-except ValueError:
-    print("your answer is invalid")
-    country = input("please reenter your country\n(usa,india,russia,china,france(europe),ethiopia,bangladesh' and uk supported)\n")
+country = input("please enter your country\n(usa,india,russia,china,france(europe),ethiopia,bangladesh' and uk supported)\n")
 if country == 'usa' or 'uk':
    legallimit = 0.08
 elif country =='india' or 'russia':
@@ -85,21 +92,37 @@ elif country == 'bangladesh':
 else:
    legallimit = 0.05
 
-
+x = 0
 gender = input("Please enter your gender, m or f")
+while x != 1:
+      if gender == 'm' or 'f':
+         x = 1
+         continue
+      print("that is not a valid gender")
+      gender = input("Please enter your gender, m or f")
+      if gender == 'm' or 'f':
+         x = 1
+      else:
+         continue
+         
+else:
+   pass
+if gender == "m":
+   bw = 0.58
+elif gender == 'f':
+   bw = 0.49
+
+   
+
 try:
    wt =int( input("Please enter your weight in kgs "))
 except ValueError:
    print("your answer was invalid")
    wt =int( input("Please renter your weight in kgs "))
-   
-
-if gender == "m":
-   bw = 0.58
-elif gender == 'f':
-   bw = 0.49
-else:
-   print("that is not a valid gender")
+if wt > 400:
+   while wt > 400:
+      print("come, on you don't wiegh that much!")
+      wt = int(input("Please re-enter a reasonable value"))
 
 
 def __init__():
@@ -132,7 +155,7 @@ def stopcar():
    caroff = True
 
 def seatbelt(speedn,stbltinput):
-   #stbltinput = checkinput.seatbeltcheck(stbltinput)
+   stbltinput = checkinput.seatbeltcheck(stbltinput)
    
    if stbltinput == "on":
        stblt = True
@@ -213,7 +236,6 @@ def drinkgame(ncorrect = 0):
 
       try:
          usertest = int(input("What is  {} ".format(str(testforA))+testop+" {} ".format(str(testforB))))
-         usertest = checkinput.numalphcheck()
          if usertest == testfor:
             print("correct")
             ncorrect = ncorrect+1
@@ -240,10 +262,10 @@ def drinkgame(ncorrect = 0):
    
       
 def drinkreg():
-   havedrunk = input("Have you drank any alcohol?(yes or no)")
-   havedrunk = checkinput.alphnumcheck(havedrunk)
+   havedrunk = input("Have you drank any alcohol?(yes/no)")
+   havedrunk = checkinput.yesnocheck(havedrunk)
    if havedrunk == 'yes':
-      thinkdrunk = input("Do you think you are sober enough to drive?(yes or no)")
+      thinkdrunk = input("Do you think you are sober enough to drive?")
       thinkdrunk = checkinput.alphnumcheck(thinkdrunk)
       if thinkdrunk == 'no':
          print("Ordering Taxi to take you safely!")
@@ -299,12 +321,8 @@ def choosefunc():
 
 def begin():
    welcome()
-   run = 0
    print("\n")
    __init__()
-   print("\n")
-   if run > 1:
-      choosefunc()
    print("\n")
 begin()
 def main():
@@ -323,8 +341,7 @@ def main():
 loop=1
 while loop==1 and TaxiOrder == False and caroff == False:
    main()
-   print("Restarting the Program...\n\n")
-   run += 1
+   print("Restarting the program...\n\n")
 
 
    
