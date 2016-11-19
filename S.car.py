@@ -336,7 +336,7 @@ def main():
    speed = checkinput.speedcheck(speed)
    speedn = int(speed) 
    speedreg(speedn)
-   stbltinputt = input("Enter the state of the seatbelt ")
+   stbltinputt = input("Enter the state of the seatbelt(On/Off) ")
    seatbelt(speedn,stbltinputt)
    drinkreg()
 loop=1
